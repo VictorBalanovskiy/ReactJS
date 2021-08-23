@@ -1,0 +1,22 @@
+.myForm {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  height: 300px;
+}
+
+.myTextarea {
+  width: 100%-6px;
+  height: 100px;
+  margin: 10px 0;
+}
+
+.myButton {
+  width: 100px;
+  height: 30px;
+  border-radius: 15px;
+  box-shadow: none;
+  border: none;
+  margin: 0 auto;
+  background: greenyellow;
+}
