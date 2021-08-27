@@ -1,37 +1,25 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import React from 'react';
 import './Form.css'
 import { TextField, Button } from '@material-ui/core';
 
-export const Form = () => {
-
-    const myRef = React.createRef();
-    const myRefAuthor = React.createRef();
-
+export const Form = (props) => {
     const [comment, setComment] = useState([]);
+    
+    const handleChangeAuthor = (e) => { setComment({ ...comment, author: e.target.value }) };
 
-    let handleChange = (e) => {
-        e.preventDefault();
-        let list = {
-            text: myRef.current.value,
-            author: myRefAuthor.current.value,
-        }
-        let comments = [...comment, list];
-        setComment(comments);
-        myRef.current.value = "";
-        myRefAuthor.current.value = "";
-        console.log(myRef);
+    const handleChangeText = (e) => { setComment({ ...comment, text: e.target.value }) };
+
+    const handleChange = () => {
+        props.handleChangeMessageList(comment);
+        setComment({ author: '', text: '' });
     }
-
-    useEffect(() => {
-        console.log('Добавлено сообщение');
-    })
 
     return (
             <div className="myForm">
-            <TextField className="myInput" margin='normal' type="text" inputRef={myRefAuthor} label="AUTHOR" />
-            <TextField autoFocus color='secondary' margin='normal' className="myTextarea" inputRef={myRef} id="standard-basic" label="MESSAGE" />
-            <Button size='small' color='primary' variant="contained" className="myButton" onClick={handleChange}>Send</Button>
+                <TextField className="myInput" margin='normal' type="text"  onChange={handleChangeAuthor} label="AUTHOR" />
+                 <TextField autoFocus inputRef ={(input) => {if(input != null) {input.focus()}}} color='secondary' margin='normal' className="myTextarea" onChange={handleChangeText} id="standard-basic" label="MESSAGE" />
+                <Button size='small' color='primary' variant="contained" className="myButton" onClick={handleChange}>Send</Button>
             </div>
  )
     
